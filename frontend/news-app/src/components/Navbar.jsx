@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Fan,
-  Menu,
-  Moon,
-  Search,
-  Sun,
-  User,
-  UserCircle,
-  UsersRound,
-} from "lucide-react"; // or from 'react-icons/...' depending on your library
+import { Search } from "lucide-react"; // or from 'react-icons/...' depending on your library
 
 import UserMenu from "../Utilities/UserMenu";
 import NewsCategory from "../Utilities/NewsCategory";
@@ -35,13 +26,13 @@ function Navbar() {
           <span>Briefly.</span>
         </div>
 
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-3">
           <div className="relative bg-gray-200 p-2 rounded-lg">
             <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <input
               type="text"
               placeholder="Search news..."
-              className="md:pl-10 pl-7 w-30 md:w-64 outline-none focus:outline-none"
+              className="md:pl-10 pl-6 w-33 md:w-64 outline-none focus:outline-none"
             />
           </div>
 
@@ -53,13 +44,16 @@ function Navbar() {
           */}
 
           {/* Mobile menu button Hamburger Menu for mobile screen-view */}
+          {/* <button className="md:hidden ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95"> */}
 
-          <button className="md:hidden ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
+          <button className="lg:hidden ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
             <NewsCategory />
           </button>
 
           {/* Navigation Links for desktop screen-view*/}
-          <div className="hidden md:flex space-x-6">
+          {/* <div className="hidden md:flex space-x-6"> */}
+          
+          <div className="hidden lg:flex space-x-6">
             {desktopLinks.map((link) => {
               return (
                 <p
@@ -73,8 +67,7 @@ function Navbar() {
           </div>
 
           {/* User-Account-section */}
-          <div
-            className="ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
+          <div className="ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
             <UserMenu />
           </div>
           {/* 

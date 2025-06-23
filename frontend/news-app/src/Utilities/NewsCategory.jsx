@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 
+
 import {
   FaGlobe,
   FaLandmark,
@@ -9,7 +10,6 @@ import {
   FaHeartbeat,
   FaFootballBall,
   FaPlaneDeparture,
-  FaNewspaper,
   FaAtom,
 } from "react-icons/fa";
 
@@ -38,7 +38,7 @@ function NewsCategory() {
     <div className="relative" ref={dropDownRef}>
       {/* Icon Trigger */}
       <div
-        className="bg-gray-000 p-2  cursor-pointer"
+        className="bg-gray-000 p-2  cursor-pointer "
         onClick={() => setOpen(!open)}
       >
         <Menu size={25} />
