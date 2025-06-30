@@ -41,6 +41,18 @@ const NewsContainer = ({ article }) => {
           Source: {source?.name || "Unknown"}
         </div>
 
+        {/* AI services functionality */}
+        <div className="flex items-center justify-between mt-4 text-sm text-gray-500 px-1">
+          <span className="bg-slate-100 p-1 cursor-pointer border border-slate-200 rounded hover: shadow-2xs shadow-amber-50 font-semibold text-black">Summarize</span>
+          
+          <span className="bg-slate-200 p-1 cursor-pointer border border-slate-200 rounded hover: shadow-2xs shadow-amber-50 text-black font-extralight"> Check Facts</span>
+        </div>
+
+        {/* Validation assurance percetage */}
+        <div className="text-gray-500 text-sm text-start font-sans mt-2 pb-0">
+          <span> Verdict: True (This news is 89% true.)</span>
+        </div>
+
       </div>
     </div>
   );

@@ -16,7 +16,8 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<News country="us" category="general" articles={articles} setArticles={setArticles} />} />
+        <Route path="/" element={<News articles={articles} setArticles={setArticles} />} />
+        {/* <News country="in" category="general" articles={articles} setArticles={setArticles} /> */}
       </Routes>
     </BrowserRouter>
   );
