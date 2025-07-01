@@ -1,55 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NewsContainer from "../components/NewsContainer";
+import Navbar from "../components/Navbar";
+import NewsCategory from "../Utilities/NewsCategory";
 
-function News({ country, category, articles, setArticles }) {
-  
-  // const fetchAllNews = async () => {
-  //   try {
-  //     const res = await axios.get(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${key}`);
+function News() {
 
-  //     setArticles(res.data.articles);
-  //     // For debugging purposes, you can log the response
-  //     console.log(res.data.articles); 
-
-  //   } catch (error) {
-  //     console.log("Error fetching news:", error); //error handling
-  //   }
-  // };
+  const [category, setCategory] = useState("General");
+  const [articles, setArticles] = useState([]);
 
   const backEndUrl = import.meta.env.VITE_BACKEND_URL;
 
-  const getNews = async (category = 'general') => {
+  const getNews = async (category) => {
     const res = await axios.get(`${backEndUrl}`, {
       params: { category }
     });
-    console.log(res.data);
     return res.data;
-
   };
 
   useEffect(() => {
-    getNews().then(data => setArticles(data.articles));
-  }, []);
+    getNews(category).then(data => setArticles(data.articles));
+  }, [category]);
 
 
-  // useEffect(() => {
-  //   fetchAllNews();
-  // }, []);
-
-  
   return (
-    <div className="h-screen text-black bg-white py-24 px-4 md:px-0">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-7">
-        {
-          articles.map((article, index) => {
-            return (
-              <NewsContainer
-                key={index}
-                article={article} />
-            )
-          })
-        }
+    <div>
+      <Navbar onSelectCategory={setCategory} />
+      <div className="h-screen text-black bg-white py-24 px-4 md:px-0">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-7">
+          {
+            articles.map((article, index) => {
+              return (
+                <NewsContainer
+                  key={index}
+                  article={article} />
+              )
+            })
+          }
+        </div>
       </div>
     </div>
   );

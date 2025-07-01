@@ -7,20 +7,30 @@ import { useEffect, useContext } from "react";
 
 function App() {
   const [articles, setArticles] = React.useState([]);
-  
+  const [category, setCategory] = React.useState();
+
   useEffect(() => {
     document.title = "Briefly - Your Daily News Digest";
   });
 
   return (
     <BrowserRouter>
-      <Navbar />
+
+      <Navbar onSelectCategory={setCategory} />
+      
       <Routes>
-        <Route path="/" element={<News articles={articles} setArticles={setArticles} />} />
-        {/* <News country="in" category="general" articles={articles} setArticles={setArticles} /> */}
+        <Route path="/" element={<News category={'general'} articles={articles} setArticles={setArticles} />} />
+        <Route path="/" element={<News category={'business'} articles={articles} setArticles={setArticles} />} />
+        <Route path="/" element={<News category={'technology'} articles={articles} setArticles={setArticles} />} />
+        <Route path="/" element={<News category={'science'} articles={articles} setArticles={setArticles} />} />
+        <Route path="/" element={<News category={'health'} articles={articles} setArticles={setArticles} />} />
+        <Route path="/" element={<News category={'sports'} articles={articles} setArticles={setArticles} />} />
+        <Route path="/" element={<News category={'entertainement'} articles={articles} setArticles={setArticles} />} />
+        
       </Routes>
+
     </BrowserRouter>
   );
 }
 
-export default App;
+export default App; 

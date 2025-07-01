@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const NewsContainer = ({ article }) => {
 
   // Destructuring the article object to extract necessary properties
   const { source, author, title, description, url, urlToImage, publishedAt } = article || {};
+
+  const defaultVerdict = "True ( This news is 89% true. )"; // Default validation verdict
 
   return (
 
@@ -43,14 +44,14 @@ const NewsContainer = ({ article }) => {
 
         {/* AI services functionality */}
         <div className="flex items-center justify-between mt-4 text-sm text-gray-500 px-1">
-          <span className="bg-slate-100 p-1 cursor-pointer border border-slate-200 rounded hover: shadow-2xs shadow-amber-50 font-semibold text-black">Summarize</span>
+          <span className="bg-slate-100 p-1 cursor-pointer border border-slate-200 rounded hover:bg-blue-200 shadow-2xs shadow-amber-50 font-semibold text-black">Summarize</span>
           
-          <span className="bg-slate-200 p-1 cursor-pointer border border-slate-200 rounded hover: shadow-2xs shadow-amber-50 text-black font-extralight"> Check Facts</span>
+          <span className="bg-slate-100 p-1 cursor-pointer border border-slate-200 rounded hover:bg-amber-100 shadow-2xs shadow-amber-50 text-black font-extralight"> Check Facts</span>
         </div>
 
         {/* Validation assurance percetage */}
-        <div className="text-gray-500 text-sm text-start font-sans mt-2 pb-0">
-          <span> Verdict: True (This news is 89% true.)</span>
+        <div className="text-gray-500 text-sm text-start font-sans mt-2 pb-0 mb-0">
+          <span> Verdict: {defaultVerdict}</span>
         </div>
 
       </div>

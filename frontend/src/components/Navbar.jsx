@@ -1,22 +1,29 @@
 import React from "react";
-import { Search } from "lucide-react"; // or from 'react-icons/...' depending on your library
+import { Search } from "lucide-react";
 
 import UserMenu from "../Utilities/UserMenu";
 import NewsCategory from "../Utilities/NewsCategory";
+import { BiCategory } from "react-icons/bi";
 
-function Navbar() {
+function Navbar({ onSelectCategory }) {
+
   const desktopLinks = [
-    "World", // Global news first
-    "Politics", // National/international governance
+    "General", // Global news first
     "Business", // Market and economic-related news
-    "Finance", // Personal finance, banking, stocks
     "Technology", // Popular category in digital era
     "Science", // Academic, discoveries, research
     "Health", // Public interest, especially post-COVID
     "Sports", // Widely followed
     "Entertainment", // Movies, shows, celebrities
-    "Travel", // Leisure, lifestyle
+    // "Finance", // Personal finance, banking, stocks
+    // "Politics", // National/international governance
+    // "Travel", // Leisure, lifestyle
   ];
+
+
+  //news category dropdown functionality both for mobile and desktop
+  const [selectedCategory, setSelectedCategory] = React.useState(desktopLinks[0]);
+
 
   return (
     <div className="fixed w-full bg-[#f6fafd] z-10 shadow-md">
@@ -36,31 +43,29 @@ function Navbar() {
             />
           </div>
 
-          {/* Theme button */}
-          {/*
-             <button className="bg-gray-200 px-3 py-2 rounded-lg cursor-pointer"> 
-              <Sun /> 
-             </button>
-          */}
-
-          {/* Mobile menu button Hamburger Menu for mobile screen-view */}
-          {/* <button className="md:hidden ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95"> */}
-
           <button className="lg:hidden ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
-            <NewsCategory />
+            <NewsCategory onSelectCategory={(category) => {
+              setSelectedCategory(category)
+              if (onSelectCategory) onSelectCategory(category);
+            }} />
           </button>
 
           {/* Navigation Links for desktop screen-view*/}
-          {/* <div className="hidden md:flex space-x-6"> */}
-          
+
           <div className="hidden lg:flex space-x-6">
             {desktopLinks.map((link) => {
               return (
                 <p
                   key={link}
-                  className="text-gray-700 hover:text-[#6f98ff] cursor-pointer"
+                  className={`text-gray-800 hover:text-[#6f98ff] cursor-pointer $${selectedCategory === link ? "text-[#6f98ff] font-semibold" : ""}`}
+
+                  onClick={() => {
+                    setSelectedCategory(link);
+                    if (onSelectCategory) onSelectCategory(link.toLowerCase());
+                  }}
                 >
                   {link}
+
                 </p>
               );
             })}
@@ -70,12 +75,7 @@ function Navbar() {
           <div className="ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
             <UserMenu />
           </div>
-          {/* 
-          <div className="bg-gray-200 px-1 py-1 rounded-full cursor-pointer right-0 flex items-center gap-2">
-            {/* <UserCircle className="w-6 h-6 text-black" strokeWidth={2.5} /> 
 
-          </div>
-           */}
         </div>
       </div>
     </div>

@@ -16,7 +16,25 @@ import {
 import { Menu } from "lucide-react";
 import { MdArticle, MdMovie } from "react-icons/md";
 
-function NewsCategory() {
+import Navbar from "../components/Navbar";
+
+function NewsCategory({ onSelectCategory }) {
+
+  // List of categories and icons for easier mapping
+  const categories = [
+    { name: "General", icon: <MdArticle className="w-4 h-4" /> },
+    { name: "Business", icon: <FaBriefcase className="w-4 h-4" /> },
+    { name: "Technology", icon: <FaMicrochip className="w-4 h-4" /> },
+    { name: "Science", icon: <FaAtom className="w-4 h-4" /> },
+    { name: "Health", icon: <FaHeartbeat className="w-4 h-4" /> },
+    { name: "Sports", icon: <FaFootballBall className="w-4 h-4" /> },
+    { name: "Entertainment", icon: <MdMovie className="w-4 h-4" /> },
+    // { name: "Politics", icon: <FaLandmark className="w-4 h-4" /> },
+    // { name: "Finance", icon: <FaChartLine className="w-4 h-4" /> },
+    // { name: "Travel", icon: <FaPlaneDeparture className="w-4 h-4" /> },
+  ];
+
+  // State to manage dropdown visibility
   const [open, setOpen] = useState(false);
   const dropDownRef = useRef(null);
 
@@ -45,55 +63,29 @@ function NewsCategory() {
       </div>
 
       {/* Dropdown */}
-      {open && (
-        <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md z-50">
-          <ul className="text-sm text-gray-700">
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <MdArticle className="w-4 h-4" /> General
-            </li>
+      {open &&
+        (
+          <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-md shadow-md z-50">
+            <ul className="text-sm text-gray-700">
 
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaGlobe className="w-4 h-4" /> World
-            </li>
+              {categories.map((category) => (
+                <li
+                  key={category.name}
+                  className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
+                  onClick={() => {
+                    setOpen(false);
 
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaLandmark className="w-4 h-4" /> Politics
-            </li>
+                    if (onSelectCategory) onSelectCategory(category.name.toLowerCase())
+                  }}
+                >
+                  {category.icon}
+                  {category.name}
+                </li>
+              ))}
 
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaBriefcase className="w-4 h-4" /> Business
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaChartLine className="w-4 h-4" /> Finance
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaMicrochip className="w-4 h-4" /> Technology
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaAtom className="w-4 h-4" /> Science
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaHeartbeat className="w-4 h-4" /> Health
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaFootballBall className="w-4 h-4" /> Sports
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <MdMovie className="w-4 h-4" /> Entertainment
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <FaPlaneDeparture className="w-4 h-4" /> Travel
-            </li>
-          </ul>
-        </div>
-      )}
+            </ul>
+          </div>
+        )}
       {/* End of Dropdown */}
     </div>
   );
