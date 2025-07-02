@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState } from "react";
 
-
 import {
   FaGlobe,
   FaLandmark,
@@ -70,6 +69,7 @@ function NewsCategory({ onSelectCategory }) {
 
               {categories.map((category) => (
                 <li
+
                   key={category.name}
                   className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
                   onClick={() => {
@@ -80,6 +80,8 @@ function NewsCategory({ onSelectCategory }) {
                 >
                   {category.icon}
                   {category.name}
+
+
                 </li>
               ))}
 

@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 
 import UserMenu from "../Utilities/UserMenu";
 import NewsCategory from "../Utilities/NewsCategory";
-import { BiCategory } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 function Navbar({ onSelectCategory }) {
 
@@ -23,7 +23,6 @@ function Navbar({ onSelectCategory }) {
 
   //news category dropdown functionality both for mobile and desktop
   const [selectedCategory, setSelectedCategory] = React.useState(desktopLinks[0]);
-
 
   return (
     <div className="fixed w-full bg-[#f6fafd] z-10 shadow-md">
@@ -55,18 +54,18 @@ function Navbar({ onSelectCategory }) {
           <div className="hidden lg:flex space-x-6">
             {desktopLinks.map((link) => {
               return (
-                <p
+                <Link
                   key={link}
                   className={`text-gray-800 hover:text-[#6f98ff] cursor-pointer $${selectedCategory === link ? "text-[#6f98ff] font-semibold" : ""}`}
-
                   onClick={() => {
                     setSelectedCategory(link);
                     if (onSelectCategory) onSelectCategory(link.toLowerCase());
                   }}
+
+                  to={`/category/${link.toLowerCase()}`}
                 >
                   {link}
-
-                </p>
+                </Link>
               );
             })}
           </div>

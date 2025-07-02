@@ -1,9 +1,11 @@
 
+import { BrowserRouter, Route, Routes , Navigate} from "react-router-dom";
 import React from "react";
 import Navbar from "./components/Navbar";
 import News from "./Pages/News";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useContext } from "react";
+
+import { Link } from "react-router-dom";
 
 function App() {
   const [articles, setArticles] = React.useState([]);
@@ -13,20 +15,15 @@ function App() {
     document.title = "Briefly - Your Daily News Digest";
   });
 
+
   return (
     <BrowserRouter>
 
       <Navbar onSelectCategory={setCategory} />
-      
+
       <Routes>
-        <Route path="/" element={<News category={'general'} articles={articles} setArticles={setArticles} />} />
-        <Route path="/" element={<News category={'business'} articles={articles} setArticles={setArticles} />} />
-        <Route path="/" element={<News category={'technology'} articles={articles} setArticles={setArticles} />} />
-        <Route path="/" element={<News category={'science'} articles={articles} setArticles={setArticles} />} />
-        <Route path="/" element={<News category={'health'} articles={articles} setArticles={setArticles} />} />
-        <Route path="/" element={<News category={'sports'} articles={articles} setArticles={setArticles} />} />
-        <Route path="/" element={<News category={'entertainement'} articles={articles} setArticles={setArticles} />} />
-        
+        <Route path="/" element={<Navigate to="/category/general" replace />} />
+        <Route path="/category/:category" element={<News articles={articles} setArticles={setArticles} />} />
       </Routes>
 
     </BrowserRouter>
