@@ -1,21 +1,8 @@
 import { useRef, useEffect, useState } from "react";
-
-import {
-  FaGlobe,
-  FaLandmark,
-  FaBriefcase,
-  FaChartLine,
-  FaMicrochip,
-  FaHeartbeat,
-  FaFootballBall,
-  FaPlaneDeparture,
-  FaAtom,
-} from "react-icons/fa";
-
+import { FaBriefcase, FaMicrochip, FaHeartbeat, FaFootballBall, FaAtom } from "react-icons/fa";
 import { Menu } from "lucide-react";
 import { MdArticle, MdMovie } from "react-icons/md";
 
-import Navbar from "../components/Navbar";
 
 function NewsCategory({ onSelectCategory }) {
 
@@ -28,12 +15,8 @@ function NewsCategory({ onSelectCategory }) {
     { name: "Health", icon: <FaHeartbeat className="w-4 h-4" /> },
     { name: "Sports", icon: <FaFootballBall className="w-4 h-4" /> },
     { name: "Entertainment", icon: <MdMovie className="w-4 h-4" /> },
-    // { name: "Politics", icon: <FaLandmark className="w-4 h-4" /> },
-    // { name: "Finance", icon: <FaChartLine className="w-4 h-4" /> },
-    // { name: "Travel", icon: <FaPlaneDeparture className="w-4 h-4" /> },
   ];
 
-  // State to manage dropdown visibility
   const [open, setOpen] = useState(false);
   const dropDownRef = useRef(null);
 

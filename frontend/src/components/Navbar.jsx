@@ -1,27 +1,13 @@
 import React from "react";
 import { Search } from "lucide-react";
-
 import UserMenu from "../Utilities/UserMenu";
 import NewsCategory from "../Utilities/NewsCategory";
 import { Link } from "react-router-dom";
 
 function Navbar({ onSelectCategory }) {
 
-  const desktopLinks = [
-    "General", // Global news first
-    "Business", // Market and economic-related news
-    "Technology", // Popular category in digital era
-    "Science", // Academic, discoveries, research
-    "Health", // Public interest, especially post-COVID
-    "Sports", // Widely followed
-    "Entertainment", // Movies, shows, celebrities
-    // "Finance", // Personal finance, banking, stocks
-    // "Politics", // National/international governance
-    // "Travel", // Leisure, lifestyle
-  ];
+  const desktopLinks = ["General", "Business", "Technology", "Science", "Health", "Sports", "Entertainment"];
 
-
-  //news category dropdown functionality both for mobile and desktop
   const [selectedCategory, setSelectedCategory] = React.useState(desktopLinks[0]);
 
   return (
@@ -50,20 +36,14 @@ function Navbar({ onSelectCategory }) {
           </button>
 
           {/* Navigation Links for desktop screen-view*/}
-
           <div className="hidden lg:flex space-x-6">
             {desktopLinks.map((link) => {
               return (
                 <Link
+                  to={`/${link.toLowerCase()}`}
                   key={link}
-                  className={`text-gray-800 hover:text-[#6f98ff] cursor-pointer $${selectedCategory === link ? "text-[#6f98ff] font-semibold" : ""}`}
-                  onClick={() => {
-                    setSelectedCategory(link);
-                    if (onSelectCategory) onSelectCategory(link.toLowerCase());
-                  }}
+                  className={`text-gray-800 hover:text-[#6f98ff] cursor-pointer`}>
 
-                  to={`/category/${link.toLowerCase()}`}
-                >
                   {link}
                 </Link>
               );
