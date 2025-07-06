@@ -58,7 +58,6 @@ function NewsCategory({ onSelectCategory }) {
                   onClick={() => {
                     setOpen(false);
 
-                    if (onSelectCategory) onSelectCategory(category.name.toLowerCase())
                   }}
                 >
                   {category.icon}
