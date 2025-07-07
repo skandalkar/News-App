@@ -34,10 +34,12 @@ app.get('/api/news', async (req, res) => {
         res.status(500).json({ error: 'News API failed' });
     }
 });
- */ 
+ */
 
 app.get("/api/news", async (req, res) => {
-    const category = req.query.category;
+    
+    let category = req.query.category || 'general'; // Default to 'general'
+    category = category.toLowerCase();
 
     const url = `https://newsapi.org/v2/top-headlines?category=${category.toLowerCase()}&apiKey=${process.env.NEWS_API_KEY}&country=us`;
 
