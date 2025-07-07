@@ -2,25 +2,32 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import NewsContainer from "../components/NewsContainer";
 import Navbar from "../components/Navbar";
+import { useParams } from "react-router-dom";
 
 function News() {
 
-  const [category, setCategory] = useState();
-  const [articles, setArticles] = useState([]);
-
   const backEndUrl = import.meta.env.VITE_BACKEND_URL;  //my backend running URL
+  const { category } = useParams(); // Get the category from the URL parameters
+  const [articles, setArticles] = useState([]); // State to hold the articles
+  const [loading, setLoading] = useState(true);
 
-  const getNews = async (category) => {
-    const res = await axios.get(`${backEndUrl}`, {
-      params: { category }
-    });
-    return res.data;
+  const fetchNews = async () => {
+    try {
+      const response = await axios.get(`${backEndUrl}/api/news`, {
+        params: { category },
+      });
+      setArticles(response.data.articles);
+      setLoading(false);
+    } 
+    catch (error) {
+      console.error("Error fetching news:", error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    getNews(category).then(data => setArticles(data.articles));
-  }, []);
-
+    fetchNews();
+  }, [category, backEndUrl]);
 
   return (
     <div>

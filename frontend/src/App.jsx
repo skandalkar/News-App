@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React from "react";
 import Navbar from "./components/Navbar";
 import News from "./Pages/News";
@@ -16,12 +16,9 @@ function App() {
     <BrowserRouter>
 
       <Navbar setArticles={setArticles} />
-
       <Routes>
-        {/* <Route path="/" element={<Navigate to="/category/general" replace />} />
-        <Route path="/category/:category" element={<News articles={articles} setArticles={setArticles} />} /> */}
-        <Route path="/" element={<News category='general' articles={articles} setArticles={setArticles} />} />
-        
+        <Route path="/" element={<News />} />
+        <Route path="/category/:category" element={<News />} />
       </Routes>
 
     </BrowserRouter>

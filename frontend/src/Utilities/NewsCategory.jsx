@@ -2,11 +2,11 @@ import { useRef, useEffect, useState } from "react";
 import { FaBriefcase, FaMicrochip, FaHeartbeat, FaFootballBall, FaAtom } from "react-icons/fa";
 import { Menu } from "lucide-react";
 import { MdArticle, MdMovie } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
-function NewsCategory({ onSelectCategory }) {
+function NewsCategory() {
 
-  // List of categories and icons for easier mapping
   const categories = [
     { name: "General", icon: <MdArticle className="w-4 h-4" /> },
     { name: "Business", icon: <FaBriefcase className="w-4 h-4" /> },
@@ -16,6 +16,8 @@ function NewsCategory({ onSelectCategory }) {
     { name: "Sports", icon: <FaFootballBall className="w-4 h-4" /> },
     { name: "Entertainment", icon: <MdMovie className="w-4 h-4" /> },
   ];
+
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const dropDownRef = useRef(null);
@@ -57,7 +59,7 @@ function NewsCategory({ onSelectCategory }) {
                   className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
                   onClick={() => {
                     setOpen(false);
-
+                    navigate(`/category/${category.name.toLowerCase()}`);
                   }}
                 >
                   {category.icon}

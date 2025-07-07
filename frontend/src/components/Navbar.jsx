@@ -2,20 +2,37 @@ import React from "react";
 import { Search } from "lucide-react";
 import UserMenu from "../Utilities/UserMenu";
 import NewsCategory from "../Utilities/NewsCategory";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 
 function Navbar({ onSelectCategory }) {
 
   const desktopLinks = ["General", "Business", "Technology", "Science", "Health", "Sports", "Entertainment"];
+  const location = useLocation();
+  // Determine the selected category based on the current URL path
 
-  const [selectedCategory, setSelectedCategory] = React.useState(desktopLinks[0]);
+  // Get the category from the URL, default to "General"
+  const currentCategory = location.pathname.startsWith("/category/")
+    ? location.pathname.split("/")[2]?.charAt(0).toUpperCase() + location.pathname.split("/")[2]?.slice(1)
+    : "General";
+
+  const [selectedCategory, setSelectedCategory] = React.useState(currentCategory);
+
+  // Update selectedCategory whenever the route changes
+  useEffect(() => {
+    setSelectedCategory(currentCategory);
+  }, [location.pathname]);
+
 
   return (
     <div className="fixed w-full bg-[#f6fafd] z-10 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <div className="md:text-2xl text-lg font-bold text-black cursor-pointer">
-          <span>Briefly.</span>
+          <Link to={'/'}>
+            <span>Briefly.</span>
+          </Link>
         </div>
 
         <div className="flex items-center justify-center gap-3">
@@ -40,11 +57,11 @@ function Navbar({ onSelectCategory }) {
             {desktopLinks.map((link) => {
               return (
                 <Link
-                  to={`/${link.toLowerCase()}`}
+                  to={`/category/${link.toLowerCase()}`}
                   key={link}
-                  className={`text-gray-800 hover:text-[#6f98ff] cursor-pointer`}>
-
+                  className={`text-gray-800 hover:text-[#6f98ff] cursor-pointer ${selectedCategory === link ? 'font-semibold' : ''}`}>
                   {link}
+
                 </Link>
               );
             })}
