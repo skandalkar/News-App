@@ -4,11 +4,12 @@ import UserMenu from "../Utilities/UserMenu";
 import NewsCategory from "../Utilities/NewsCategory";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "axios";
 
+const desktopLinks = ["General", "Business", "Technology", "Science", "Health", "Sports", "Entertainment"];
 
-function Navbar({ onSelectCategory }) {
+function Navbar({ setArticles, onSelectCategory }) {
 
-  const desktopLinks = ["General", "Business", "Technology", "Science", "Health", "Sports", "Entertainment"];
   const location = useLocation();
   // Determine the selected category based on the current URL path
 
@@ -25,6 +26,32 @@ function Navbar({ onSelectCategory }) {
   }, [location.pathname]);
 
 
+  // Search functionality can be added here
+
+  const backEndUrl = import.meta.env.VITE_BACKEND_URL;  //my backend running URL
+
+  const handleSearch = async (e) => {
+    const search = e.target.value
+    // console.log("Search Term:", search); // Check if this prints
+
+    try {
+      const res = await axios.get(`${backEndUrl}/api/news/search`, {
+        params: { q: search }
+      });
+
+      // console.log("Search Results:", res.data); // Check if articles come
+      if (setArticles) {
+        setArticles(res.data.articles);
+        // console.log(res.data.articles)
+      }
+
+    } catch (error) {
+      console.log(error);
+
+    }
+
+  }
+
   return (
     <div className="fixed w-full bg-[#f6fafd] z-10 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -39,6 +66,7 @@ function Navbar({ onSelectCategory }) {
           <div className="relative bg-gray-200 p-2 rounded-lg">
             <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <input
+              onChange={handleSearch}
               type="text"
               placeholder="Search news..."
               className="md:pl-10 pl-6 w-33 md:w-64 outline-none focus:outline-none"

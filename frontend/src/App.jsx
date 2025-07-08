@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import News from "./Pages/News";
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 
 
 function App() {
-  const [articles, setArticles] = React.useState([]);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     document.title = "Briefly - Your Daily News Digest";
@@ -17,8 +17,8 @@ function App() {
 
       <Navbar setArticles={setArticles} />
       <Routes>
-        <Route path="/" element={<News />} />
-        <Route path="/category/:category" element={<News />} />
+        <Route path="/" element={<News articles={articles} setArticles={setArticles} />} />
+        <Route path="/category/:category" element={<News articles={articles} setArticles={setArticles} />} />
       </Routes>
 
     </BrowserRouter>

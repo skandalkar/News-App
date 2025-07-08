@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { UserCircle, Palette, User } from "lucide-react";
+import { UserCircle, Palette, User, LogOut } from "lucide-react";
 
 function UserMenu() {
   const [open, setOpen] = useState(false);
@@ -42,8 +42,9 @@ function UserMenu() {
             <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
               <User className="w-4 h-4" /> Account
             </li>
+
             <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
-              <Palette className="w-4 h-4" /> Theme
+              <LogOut className="w-4 h-4" /> Logout
             </li>
 
           </ul>
