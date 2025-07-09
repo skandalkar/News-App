@@ -53,7 +53,6 @@ function News() {
                 <NewsContainer key={index} article={article} />
               ))}
             </div>
-
           )
         }
 
