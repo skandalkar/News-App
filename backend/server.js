@@ -1,12 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const connectDB = require('./config/dbConnection');
 const dotenv = require('dotenv');
 const newsRoutes = require('./routes/newsRouter');
 
+const summarizeRoute = require('./routes/summarize') // summarization endpoint
+const validateRoute = require('./routes/validation') // validation endpoint
 
-const summarizeRoute = require('./routes/summarize')
+
 
 dotenv.config();
 // connectDB();
@@ -23,7 +24,11 @@ app.use(express.json());
 app.use('/api/news', newsRoutes);
 
 // for summarization
-app.use('/api/summarize', summarizeRoute);
+app.use('/api/summarize', summarizeRoute); // summarization endpoint
+
+// for validation
+app.use('/api/validate', validateRoute); // validation endpoint
+
 
 //Start Server
 app.listen(port, () => {

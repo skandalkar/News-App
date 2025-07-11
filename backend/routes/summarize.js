@@ -13,10 +13,13 @@ router.post('/', async (req, res) => {
     });
 
     res.json({ summary: response.data.summary });
-  } catch (err) {
+  }
+
+  catch (err) {
     console.error('Error summarizing:', err.message);
     res.status(500).json({ error: 'Failed to summarize text' });
   }
+  
 });
 
 module.exports = router;
