@@ -96,9 +96,9 @@ function Navbar({ setArticles, onSelectCategory }) {
           </div>
 
           {/* User-Account-section */}
-          <div className="ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
+          {/* <div className="ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
             <UserMenu />
-          </div>
+          </div> */}
 
         </div>
       </div>

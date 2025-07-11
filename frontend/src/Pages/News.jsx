@@ -37,7 +37,7 @@ function News() {
     <div>
       <Navbar />
 
-      <div className="h-screen text-black bg-white py-24 px-4 md:px-0">
+      <div className="h-screen text-black py-24 px-4 md:px-0">
         {
           loading ? (
             <div className="h-full flex items-center justify-center w-full">

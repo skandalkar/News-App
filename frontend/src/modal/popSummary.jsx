@@ -1,8 +1,9 @@
 import "./modal.css";
 import { X } from "lucide-react";
-import { FadeLoader } from 'react-spinners';
+import { HashLoader } from 'react-spinners';
 
 const popSummary = ({ summary, loading, onClose }) => {
+
 
     return (
         <div className="modal-overlay">
@@ -13,13 +14,13 @@ const popSummary = ({ summary, loading, onClose }) => {
                 </div>
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-10">
-                        <FadeLoader className="h-12 w-12" />
+                        <HashLoader className="h-12 w-12 " color="#c2c2c2" size={35} />
                         <p className="mt-2 text-gray-600">Summarizing...</p>
                     </div>
                 ) : (
 
                     <div>
-                        <p className="text-black font-semibold text-sm text-justify py-5">{summary}</p>
+                        <p className="text-black font-semibold text-md text-justify py-5">{summary}</p>
                     </div>
                 )}
             </div>
