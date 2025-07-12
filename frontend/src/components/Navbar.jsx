@@ -5,6 +5,7 @@ import NewsCategory from "../Utilities/NewsCategory";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { useState } from "react";
 
 const desktopLinks = ["General", "Business", "Technology", "Science", "Health", "Sports", "Entertainment"];
 
@@ -25,32 +26,30 @@ function Navbar({ setArticles, onSelectCategory }) {
     setSelectedCategory(currentCategory);
   }, [location.pathname]);
 
-
   // Search functionality can be added here
 
-  const backEndUrl = import.meta.env.VITE_BACKEND_URL;  //my backend running URL
+  const backEndUrl = import.meta.env.VITE_BACKEND_URL;
 
-  const handleSearch = async (e) => {
-    const search = e.target.value
-    // console.log("Search Term:", search); // Check if this prints
+  const [searchTerm, setSearchTerm] = useState("");
 
-    try {
-      const res = await axios.get(`${backEndUrl}/api/news/search`, {
-        params: { q: search }
-      });
-
-      // console.log("Search Results:", res.data); // Check if articles come
-      if (setArticles) {
-        setArticles(res.data.articles);
-        // console.log(res.data.articles)
+  const handleKeyDown = async (e) => {
+    if (e.key === "Enter")
+      if (!searchTerm.trim()) return;
+      else {
+        e.preventDefault();
+        try {
+          const res = await axios.get(`${backEndUrl}/api/news/search?q=${searchTerm}`);
+          setArticles(res.data.articles);
+        } catch (err) {
+          console.error("Search failed:", err);
+        }
       }
+  };
 
-    } catch (error) {
-      console.log(error);
+  // const handleSearch = (e) => {
+  //   setSearchTerm(e.target.value);
+  // };
 
-    }
-
-  }
 
   return (
     <div className="fixed w-full bg-[#f6fafd] z-10 shadow-md">
@@ -66,10 +65,13 @@ function Navbar({ setArticles, onSelectCategory }) {
           <div className="relative bg-gray-200 p-2 rounded-lg">
             <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <input
-              onChange={handleSearch}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
+              // onChange={handleSearch}
               type="text"
               placeholder="Search news..."
-              className="md:pl-10 pl-6 w-33 md:w-64 outline-none focus:outline-none"
+              className="md:pl-10 pl-6 w-33 md:w-64 outline-none focus:outline-none bg-gray-200"
             />
           </div>
 
@@ -96,9 +98,9 @@ function Navbar({ setArticles, onSelectCategory }) {
           </div>
 
           {/* User-Account-section */}
-          {/* <div className="ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
+          <div className="ml-auto transition-all duration-150 ease-in-out transform origin-top scale-95">
             <UserMenu />
-          </div> */}
+          </div>
 
         </div>
       </div>

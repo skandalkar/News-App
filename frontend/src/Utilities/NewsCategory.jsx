@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { FaBriefcase, FaMicrochip, FaHeartbeat, FaFootballBall, FaAtom } from "react-icons/fa";
+import { FaBriefcase, FaMicrochip, FaHeartbeat, FaFootballBall, FaAtom, FaGlobe } from "react-icons/fa";
 import { Menu } from "lucide-react";
 import { MdArticle, MdMovie } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ function NewsCategory() {
 
   const categories = [
     { name: "General", icon: <MdArticle className="w-4 h-4" /> },
+    { name: "World", icon: <FaGlobe className="w-4 h-4" /> },
     { name: "Business", icon: <FaBriefcase className="w-4 h-4" /> },
     { name: "Technology", icon: <FaMicrochip className="w-4 h-4" /> },
     { name: "Science", icon: <FaAtom className="w-4 h-4" /> },

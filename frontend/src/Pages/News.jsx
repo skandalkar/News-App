@@ -7,9 +7,12 @@ import { Loader2 } from 'lucide-react';
 
 function News() {
 
-  const backEndUrl = import.meta.env.VITE_BACKEND_URL;  //my backend running URL
-  const { category } = useParams(); // Get the category from the URL parameters
-  const [articles, setArticles] = useState([]); // State to hold the articles
+  const backEndUrl = import.meta.env.VITE_BACKEND_URL;  
+
+  const { category } = useParams(); 
+
+  const [articles, setArticles] = useState([]); 
+  
   const [loading, setLoading] = useState(true);
 
   const fetchNews = async () => {

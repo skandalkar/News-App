@@ -8,7 +8,8 @@ import FactModal from "../modal/popFactsValidity";
 const NewsContainer = ({ article }) => {
 
   // Destructuring the article object to extract necessary properties
-  const { source, author, title, description, url, urlToImage, publishedAt } = article || {};
+  const { title, description, content,  url, image, publishedAt, source } = article || {};
+  // const { source, author, title, description, url, urlToImage, publishedAt } = article || {};
 
   // handle summary
   const [summary, setSummary] = useState("");
@@ -144,12 +145,15 @@ const NewsContainer = ({ article }) => {
 
 
       <div className=" max-w-md mx-auto bg-white rounded-2xl shadow-md hover:scale-100 transition-all overflow-hidden hover:shadow-lg duration-300 ml-1 mr-1 border border-gray-200">
+        {/* News image */}
         <img
-          src={urlToImage || 'https://placehold.co/555x400'}
+          src={image || 'https://via.placeholder.com/400x200?text=No+Image'}
           alt={title}
           className="w-full h-48 object-cover bg-gray-400"
+
         />
 
+        {/* News title or headline */}
         <div className=" p-4  ">
           <Link to={url}>
             <h2 className="text-xl font-semibold text-gray-800 mb-2">
@@ -162,8 +166,8 @@ const NewsContainer = ({ article }) => {
           </p>
 
           <div className=' flex justify-between mt-4 text-sm text-gray-500'>
-            <span>
-              By {author || "Unknown"}
+            <span className='mt-0 text-xs text-blue-500 font-medium'>
+               Source: {source?.name || "Unknown"}                        {/* By {author || "Unknown"} */}
             </span>
 
             <span>
@@ -172,7 +176,8 @@ const NewsContainer = ({ article }) => {
           </div>
 
           <div className='mt-2 text-xs text-blue-500 font-medium'>
-            Source: {source?.name || "Unknown"}
+            <span className="text-slate-500">Source: </span>
+            {source?.url || "Unknown"}
           </div>
 
           {/* AI services functionality */}
