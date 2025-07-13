@@ -7,22 +7,19 @@ import FactModal from "../modal/popFactsValidity";
 
 const NewsContainer = ({ article }) => {
 
-  // Destructuring the article object to extract necessary properties
-  const { title, description, content,  url, image, publishedAt, source } = article || {};
+  const { title, description, content, url, image, publishedAt, source } = article || {};
   // const { source, author, title, description, url, urlToImage, publishedAt } = article || {};
-
+  
   // handle summary
   const [summary, setSummary] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
-
   const controllerRefSummaru = useRef(null); // Store abort controller
 
   const newsSummaryApiUrl = import.meta.env.VITE_SUMMARIZER_API_URL;
 
   const handleSummarize = async () => {
     const textToSummarize = `${article.title}. ${article.description || ''}`;
-    // console.log("Sending text:", textToSummarize);
 
     setLoading(true)
     if (!textToSummarize.trim()) {
@@ -30,11 +27,9 @@ const NewsContainer = ({ article }) => {
       setShowModal(true);
       return;
     }
-
     setLoading(true);
     setShowModal(true);
 
-    // Cancel any existing request first
     if (controllerRefSummaru.current) {
       controllerRefSummaru.current.abort();
     }
@@ -74,7 +69,6 @@ const NewsContainer = ({ article }) => {
     setLoading(false);
   };
 
-
   //for facts validation
   const [factVerdict, setFactVerdict] = useState("");
   const [factEvidence, setFactEvidence] = useState([]);
@@ -82,14 +76,15 @@ const NewsContainer = ({ article }) => {
   // const [loading, setLoading] = useState(false);
 
   const controllerRefValidity = useRef(null);
-
+  
   const newsFactsValidityApiUrl = import.meta.env.VITE_FACTS_VALIDATIONS_API_URL;
 
   const handleValidation = async () => {
+    const textToValidation = `${article.title}. ${article.description || ''}`
     setLoading(true);
     try {
       const res = await axios.post(`${newsFactsValidityApiUrl}/api/validate`, {
-        text: article.title || article.description || article.source?.name
+       text: textToValidation
       });
 
       setFactVerdict(res.data.verdict || "Unable to verify news content.");
@@ -167,7 +162,7 @@ const NewsContainer = ({ article }) => {
 
           <div className=' flex justify-between mt-4 text-sm text-gray-500'>
             <span className='mt-0 text-xs text-blue-500 font-medium'>
-               Source: {source?.name || "Unknown"}                        {/* By {author || "Unknown"} */}
+              <span className="text-slate-500">Source: </span> {source?.name || "Unknown"}                        {/* By {author || "Unknown"} */}
             </span>
 
             <span>
@@ -176,8 +171,8 @@ const NewsContainer = ({ article }) => {
           </div>
 
           <div className='mt-2 text-xs text-blue-500 font-medium'>
-            <span className="text-slate-500">Source: </span>
-            {source?.url || "Unknown"}
+            <span className="text-slate-500">Url: </span>
+            <Link>{source?.url || "Unknown"}</Link>
           </div>
 
           {/* AI services functionality */}
