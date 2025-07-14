@@ -58,10 +58,6 @@ def fact_check_text():
                 "message": "No matching claims found."
             }), 200
 
-    except requests.exceptions.RequestException as e:
-        print("[EXCEPTION] Request to Google API failed:", e)
-        return jsonify({'error': str(e)}), 500
-
     except Exception as e:
         print("[EXCEPTION] Internal server error:", e)
         return jsonify({'error': str(e)}), 500
