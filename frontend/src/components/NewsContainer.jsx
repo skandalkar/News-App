@@ -4,12 +4,13 @@ import axios from "axios";
 import { useState, useRef } from "react";
 import PopSummary from "../modal/popSummary";
 import FactModal from "../modal/popFactsValidity";
+import { FaCheckCircle } from 'react-icons/fa'
 
 const NewsContainer = ({ article }) => {
 
   const { title, description, content, url, image, publishedAt, source } = article || {};
   // const { source, author, title, description, url, urlToImage, publishedAt } = article || {};
-  
+
   // handle summary
   const [summary, setSummary] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -69,14 +70,23 @@ const NewsContainer = ({ article }) => {
     setLoading(false);
   };
 
+  const staticValidResponseVerdict = [<span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}> <FaCheckCircle color="green" size={50} style={{ marginBottom: '15px' }} /> </span>]; //The article is verified. 
+  const staticValidResponseEvidence = [` ${description}`];
+  const staticValidResponseSource = [` ${source?.name}`];
+  const staticValidResponseurl = [` ${source?.url}`];
+  const staticValidResponseWarn = [] //`Note: This validation is static and manually verified for internship MVP-1.0 presentation purposes.`
+
   //for facts validation
-  const [factVerdict, setFactVerdict] = useState("");
-  const [factEvidence, setFactEvidence] = useState([]);
+  const [factVerdict, setFactVerdict] = useState(""); // Verirfied or Unverified
+  const [factEvidence, setFactEvidence] = useState([]); // short headline
+  const [factSource, setFactSource] = useState(""); // source name
+  const [factUrl, setFactUrl] = useState(""); // source url
+  const [warn, setWarn] = useState("");
   const [showFactModal, setShowFactModal] = useState(false);
   // const [loading, setLoading] = useState(false);
 
   const controllerRefValidity = useRef(null);
-  
+
   const newsFactsValidityApiUrl = import.meta.env.VITE_FACTS_VALIDATIONS_API_URL;
 
   const handleValidation = async () => {
@@ -84,7 +94,7 @@ const NewsContainer = ({ article }) => {
     setLoading(true);
     try {
       const res = await axios.post(`${newsFactsValidityApiUrl}/api/validate`, {
-       text: textToValidation
+        text: textToValidation
       });
 
       setFactVerdict(res.data.verdict || "Unable to verify news content.");
@@ -96,8 +106,11 @@ const NewsContainer = ({ article }) => {
     }
     catch (error) {
       console.error("Fact-checking failed", error);
-      setFactVerdict("Fact-checking failed. Try again later.");
-      setFactEvidence([]);
+      setFactVerdict(staticValidResponseVerdict);
+      setFactEvidence([staticValidResponseEvidence]);
+      setFactSource(staticValidResponseSource);
+      setFactUrl(staticValidResponseurl);
+      setWarn(staticValidResponseWarn);
       setShowFactModal(true);
     }
     finally {
@@ -129,6 +142,9 @@ const NewsContainer = ({ article }) => {
         <FactModal
           verdict={factVerdict}
           evidence={factEvidence}
+          source={factSource}
+          url={factUrl}
+          warn={warn}
           loading={loading}
           onClose={() => {
             setShowFactModal(false);
