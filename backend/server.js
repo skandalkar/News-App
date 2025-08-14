@@ -23,6 +23,9 @@ app.use(express.json());
 //Routes
 app.use('/api/news', newsRoutes);
 
+app.use('/auth', userAuthRoutes); //auth 
+app.use('/send',require('./routes/otpRoute')) //otp
+
 // for summarization
 app.use('/api/summarize', summarizeRoute); // summarization endpoint
 
