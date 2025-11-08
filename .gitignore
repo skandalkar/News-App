@@ -7,3 +7,20 @@
 *.tiff
 *.webp
 *.svg
+
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.env/
+
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Build artifacts
+dist/
+build/

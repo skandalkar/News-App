@@ -36,3 +36,10 @@ coverage/
 *.db
 *.sqlite
 *.dump
+
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.env/
