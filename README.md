@@ -53,7 +53,7 @@ It’s built for users who want quick insights without compromising accuracy.
 
 *(Screenshots and GIF illustrate live summarization, fact checking, and performance testing with CPU metrics.)*
 
----
+--- 
 
 ## 📊 Performance & Optimization
 
