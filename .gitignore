@@ -1,14 +1,3 @@
-# Ignore common image files
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.bmp
-*.tiff
-*.webp
-*.svg
-
-
 # Virtual Environments
 venv/
 .venv/

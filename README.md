@@ -43,13 +43,13 @@ It’s built for users who want quick insights without compromising accuracy.
 ## 🖼️ Screenshots & Demo
 
 * Home Page
-  ![Home Screenshot](assets/Screenshot%20(39).png)
+  ![Home Screenshot](assets/Screenshot(39).png)
 * Summarization in Action
-  ![Summarization Screenshot](assets/Screenshot%20(42).png)
+  ![Summarization Screenshot](assets/Screenshot(42).png)
 * Fact Validation
-  ![Fact Check Screenshot](assets/Screenshot%20(41).png)
+  ![Fact Check Screenshot](assets/Screenshot(41).png)
 * Live Demo GIF
-  ![Demo GIF](assets/Demo.gif)
+  ![Demo GIF](assets/demo.gif)
 
 *(Screenshots and GIF illustrate live summarization, fact checking, and performance testing with CPU metrics.)*
 
@@ -70,7 +70,7 @@ including:
 
 > 💬 These insights are helping me dive deeper into optimizing local AI workloads for production-level efficiency.
 
-![CPU/GPU Acceleration](assets/Screenshot%20(40).png)
+![CPU/GPU Acceleration](assets/Screenshot(40).png)
 
 ---
 
