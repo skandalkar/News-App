@@ -13,3 +13,7 @@ node_modules/
 # Build artifacts
 dist/
 build/
+
+.vscode/
+
+docs/

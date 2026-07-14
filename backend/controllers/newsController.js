@@ -1,16 +1,28 @@
 const axios = require('axios');
+const NewsArticle = require('../models/Articles');
 
-//news fetching
+const allowedCountries = ['in', 'us', 'gb', 'cn', 'ru'];
+const normalizeCountry = (country) =>
+    allowedCountries.includes(String(country || '').toLowerCase())
+        ? String(country).toLowerCase()
+        : 'in';
+
+const keyAPI = process.env.GNEWS_API_KEY;
+const newsServiceUrl = process.env.NEWS_SERVICE_URL;
+const url = `${newsServiceUrl}`;
+
+//News fetching
 const getNews = async (req, res) => {
     try {
         const { category = 'general' } = req.query;
-        const response = await axios.get(`https://gnews.io/api/v4/top-headlines?`, {
+        const country = normalizeCountry(req.query.country);
+        const response = await axios.get(`${url}/top-headlines?`, {
             params: {
-                topic: category,       
+                topic: category,
                 lang: 'en',
-                country: 'in',
-                max: 10,              
-                token: process.env.GNEWS_API_KEY, 
+                country,
+                max: 10,
+                token: keyAPI,
             },
         });
         res.json(response.data);
@@ -20,22 +32,22 @@ const getNews = async (req, res) => {
     }
 };
 
-
-//search functionality
+//Search functionality
 const searchNews = async (req, res) => {
     const { q } = req.query;
+    const country = normalizeCountry(req.query.country);
 
-    if (!q) {
+    if (!q || !q.trim()) {
         return res.status(400).json({ error: "Missing search query" });
     }
     try {
-        const response = await axios.get(' https://gnews.io/api/v4/search', {
+        const response = await axios.get(`${url}`, {
             params: {
-                q: query,
+                q: q.trim(),
                 lang: 'en',
-                country: 'in',
+                country,
                 max: 10,
-                token: process.env.GNEWS_API_KEY, // This is required
+                token: keyAPI,
             },
         });
         res.json({ articles: response.data.articles });
@@ -44,7 +56,5 @@ const searchNews = async (req, res) => {
         res.status(500).json({ error: "Failed to fetch search results" });
     }
 };
-
-
 
 module.exports = { getNews, searchNews }; 

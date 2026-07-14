@@ -4,6 +4,10 @@ import ScrollToTop from "react-scroll-to-top";
 import './index.css'
 import App from './App.jsx'
 
+// The ngrok header is a temporary bypass of warning
+import axios from "axios";
+axios.defaults.headers.common["ngrok-skip-browser-warning"] = "true";
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />

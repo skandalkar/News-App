@@ -3,9 +3,10 @@ import { FaBriefcase, FaMicrochip, FaHeartbeat, FaFootballBall, FaAtom, FaGlobe 
 import { Menu } from "lucide-react";
 import { MdArticle, MdMovie } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import ThemeToggle from "../Utilities/ThemeToggle";
 
 
-function NewsCategory() {
+function NewsCategory({ onSelectCategory }) {
 
   const categories = [
     { name: "General", icon: <MdArticle className="w-4 h-4" /> },
@@ -41,9 +42,8 @@ function NewsCategory() {
     <div className="relative" ref={dropDownRef}>
       {/* Icon Trigger */}
       <div
-        className="bg-gray-000 p-2  cursor-pointer "
-        onClick={() => setOpen(!open)}
-      >
+        className="bg-gray-100 p-2 cursor-pointer text-gray-800 dark:bg-slate-800 dark:text-white"
+        onClick={() => setOpen(!open)}>
         <Menu size={25} />
       </div>
 
@@ -60,13 +60,12 @@ function NewsCategory() {
                   className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
                   onClick={() => {
                     setOpen(false);
+                    if (onSelectCategory) onSelectCategory(category.name);
                     navigate(`/category/${category.name.toLowerCase()}`);
-                  }}
-                >
+                  }}>
+
                   {category.icon}
                   {category.name}
-
-
                 </li>
               ))}
 
