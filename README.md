@@ -72,16 +72,26 @@ This prompt is critical for maintaining style consistency and safety in generate
 
 ## 🖼️ Screenshots & Demo
 
-<!-- * Home Page
-  ![Home Screenshot](assets/Screenshot(39).png)
-* Summarization in Action
-  ![Summarization Screenshot](assets/Screenshot(42).png)
-* Fact Validation
-  ![Fact Check Screenshot](assets/Screenshot(41).png)
-* Live Demo GIF
-  ![Demo GIF](assets/demo.gif) -->
+* Home Page
+  ![Home Screenshot](assets/4.png)
+* Authentication
+  ![Auth Screenshot](assets/1.png)
+* Auth Code via mail 
+  ![Auth Code](assets/2.png)
+* User Account 
+  ![Account](assets/3.png)
+* Summarization
+  ![Summarization Screenshot](assets/5.png)
+* News Article Validation in Action
+  ![Fact Check Screenshot](assets/6.png)
+* Article Validation
+  ![Article Validation](assets/7.png)
+* CPU High Utilization while running summarization and validation engine *(locally implementation)*
+  ![CPU Utilization Summarization](assets/8.png)
 
-*(Screenshots and GIF illustrate live summarization, fact checking, and performance testing with CPU metrics.)*
+  ![CPU Utilization Validation Engine](assets/9.png)
+
+  *(Screenshots illustrate live summarization, validation, and performance testing with CPU metrics.)*
 
 --- 
 
@@ -99,7 +109,6 @@ Steps including to optimize system :
 
 > 💬 These insights are helping me dive deeper into optimizing local AI workloads for production-level efficiency.
 
-<!-- ![CPU/GPU Acceleration](assets/Screenshot(40).png) -->
 
 ---
 

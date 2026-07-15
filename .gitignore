@@ -17,3 +17,18 @@ build/
 .vscode/
 
 docs/
+
+
+# Ollama models (if stored locally)
+.ollama/
+ollama_data/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
